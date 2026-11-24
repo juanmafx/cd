@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<testsuite name="HTTP API" time="0.074248" disabled="0" errors="0" tests="16" failures="0" skipped="0" timestamp="2026-11-24T01:25:45.357Z" hostname="redacted">
+		<testcase name="returns the timestamp for GET /" time="0.023670" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="returns the timestamp for GET /any" time="0.003781" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="returns the timestamp for GET /deeply/nested/path" time="0.002278" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="returns the timestamp for GET /with?query=1" time="0.002368" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="logs the response time" time="0.002898" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="does not reflect the request path" time="0.001755" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="answers HEAD without a body" time="0.001689" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="rejects POST with 405" time="0.002005" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="rejects PUT with 405" time="0.001843" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="rejects PATCH with 405" time="0.003307" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="rejects DELETE with 405" time="0.001640" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="rejects OPTIONS with 405" time="0.001456" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="sends hardening headers and hides the framework" time="0.001481" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="answers malformed percent-encoding with a generic 400" time="0.002459" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="rejects startup when the port is already in use" time="0.002994" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+		<testcase name="configures request timeouts" time="0.000221" classname="HTTP API" file="./tests/integration/http-api.test.js"/>
+	</testsuite>
+	<testcase name="serves requests and exits cleanly on SIGTERM" time="0.192850" classname="test" file="./tests/integration/process-lifecycle.test.js"/>
+	<testcase name="serves requests and exits cleanly on SIGINT" time="0.151156" classname="test" file="./tests/integration/process-lifecycle.test.js"/>
+	<testcase name="exits non-zero on an invalid PORT" time="0.126317" classname="test" file="./tests/integration/process-lifecycle.test.js"/>
+	<testcase name="schema defines the optional request event table" time="0.003683" classname="test" file="./tests/integration/schema.test.js"/>
+	<testcase name="schema stores no client identifiers" time="0.000536" classname="test" file="./tests/integration/schema.test.js"/>
+	<testcase name="formats local time as hours:minutes:seconds:milliseconds" time="0.004609" classname="test" file="./tests/unit/clock-format.test.js"/>
+	<testcase name="keeps the original unpadded field format" time="0.000327" classname="test" file="./tests/unit/clock-format.test.js"/>
+	<testcase name="handles midnight" time="0.000275" classname="test" file="./tests/unit/clock-format.test.js"/>
+	<testcase name="delegates when headers were already sent" time="0.007283" classname="test" file="./tests/unit/error-handler.test.js"/>
+	<testcase name="hides internal error messages and logs only the error name" time="0.000624" classname="test" file="./tests/unit/error-handler.test.js"/>
+	<testcase name="maps client errors to a generic body" time="0.000363" classname="test" file="./tests/unit/error-handler.test.js"/>
+	<testcase name="treats non-client status values as server errors" time="0.000279" classname="test" file="./tests/unit/error-handler.test.js"/>
+	<testcase name="defaults to loopback on port 3000" time="0.004783" classname="test" file="./tests/unit/load-config.test.js"/>
+	<testcase name="treats an empty PORT as unset" time="0.000403" classname="test" file="./tests/unit/load-config.test.js"/>
+	<testcase name="reads HOST and PORT from the environment" time="0.000368" classname="test" file="./tests/unit/load-config.test.js"/>
+	<testcase name="accepts the port range boundaries" time="0.000303" classname="test" file="./tests/unit/load-config.test.js"/>
+	<testcase name="rejects invalid PORT value &quot;65536&quot;" time="0.001029" classname="test" file="./tests/unit/load-config.test.js"/>
+	<testcase name="rejects invalid PORT value &quot;-1&quot;" time="0.000279" classname="test" file="./tests/unit/load-config.test.js"/>
+	<testcase name="rejects invalid PORT value &quot;80.5&quot;" time="0.000219" classname="test" file="./tests/unit/load-config.test.js"/>
+	<testcase name="rejects invalid PORT value &quot;abc&quot;" time="0.000165" classname="test" file="./tests/unit/load-config.test.js"/>
+	<testcase name="rejects invalid PORT value &quot;3000abc&quot;" time="0.000247" classname="test" file="./tests/unit/load-config.test.js"/>
+	<testcase name="rejects invalid PORT value &quot; 3000&quot;" time="0.000277" classname="test" file="./tests/unit/load-config.test.js"/>
+	<testcase name="rejects invalid PORT value &quot;0x50&quot;" time="0.003509" classname="test" file="./tests/unit/load-config.test.js"/>
+	<testcase name="rejects invalid PORT value &quot;1e3&quot;" time="0.000204" classname="test" file="./tests/unit/load-config.test.js"/>
+	<!-- tests 40 -->
+	<!-- suites 1 -->
+	<!-- pass 40 -->
+	<!-- fail 0 -->
+	<!-- cancelled 0 -->
+	<!-- skipped 0 -->
+	<!-- todo 0 -->
+	<!-- duration_ms 684.369036 -->
+</testsuites>
