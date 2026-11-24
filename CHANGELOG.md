@@ -2,7 +2,13 @@
 
 This project follows [Semantic Versioning](https://semver.org/).
 
-## [2.0.0] - Unreleased (prepared 2026-11-23)
+## [2.0.1] - 2026-11-24
+
+### Changed
+
+- Corrected the release notes, changelog and security audit to reflect the published 2.0.0 release and the rewritten repository history. Documentation only, no change in code behaviour.
+
+## [2.0.0] - 2026-11-24
 
 ### Changed
 
@@ -31,3 +37,4 @@ This project follows [Semantic Versioning](https://semver.org/).
 ## [1.0.0] - 2020-11-28
 
 - Initial single-file Express service.
+- This version predates the rewritten repository history. Its commits are no longer published.

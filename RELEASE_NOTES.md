@@ -1,16 +1,12 @@
-# Release Notes: cd 2.0.0
+# Release Notes: cd 2.0.1
 
-**Status:** prepared, not yet tagged or published.
+Released on 2026-11-24.
 
-Version 2.0.0 modernizes the 2020 service. The response body is unchanged; the runtime, dependencies, defaults, structure, and verification are new.
-
-## Highlights
-
-- Express 5.3.0 on Node.js 22.12 or newer, with no advisories reported by `npm audit` at preparation time.
-- Secure defaults: loopback binding, restrictive headers, generic errors, and timeouts.
-- Modular source layout with automated tests and a committed report from a real run.
+This is a documentation-only patch release. It corrects the release notes, changelog and security audit so that they describe the published 2.0.0 release and the rewritten repository history accurately. There is no change in code behaviour.
 
 ## Upgrade notes
+
+No migration is needed from 2.0.0. When upgrading from 1.0.0:
 
 - Start with `npm start` or `node src/main.js` instead of `node app.js`.
 - To accept remote connections as before, set `HOST=0.0.0.0`, preferably behind a reverse proxy.
@@ -18,4 +14,4 @@ Version 2.0.0 modernizes the 2020 service. The response body is unchanged; the r
 
 ## Verification
 
-Test results are in `reports/tests/`. CI status for the release commit must be confirmed on GitHub before tagging.
+Test results are in `reports/tests/`. GitHub Actions passed on Node.js 22 and 24 for the commit released as 2.0.0.

@@ -1,6 +1,6 @@
 {
   "name": "cd",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Minimal hardened Express service that replies to any GET path with the server time the request was handled.",
   "type": "module",
   "main": "src/main.js",

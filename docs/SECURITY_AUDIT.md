@@ -1,6 +1,6 @@
 # Security Audit
 
-**Date:** 2026-11-23. **Scope:** the tracked files on `main` at commit `4135e56`, the full Git history, and this branch. This is a self-review using the checks listed below, not an independent third-party audit.
+**Date:** 2026-11-23. **Scope:** the original 2020 code on `main`, the full Git history as it stood before the 2026-11-24 history rewrite, and the 2.0.0 modernization. This is a self-review using the checks listed below, not an independent third-party audit.
 
 ## Checks performed
 
@@ -43,3 +43,7 @@
 - The response discloses server local time by design.
 - `engines` still permits Node.js 22.12 or newer, including releases without the latest security fixes. Operators must run a patched release.
 - There is no connection limit, so a client can hold sockets open until the server timeouts apply.
+
+## History
+
+On 2026-11-24 the public Git history was rewritten so that it holds only the 2026 modernization. The 2020 code and its commits are no longer in any branch or tag. The `gitleaks` scan above found no secrets in the earlier history, but anything that was ever published must still be treated as public.
