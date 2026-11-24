@@ -8,10 +8,13 @@
 | --- | --- | --- |
 | Dependency vulnerabilities, original lockfile | `npm audit --package-lock-only` | 8 advisories affecting packages: 1 critical, 4 high, 3 low |
 | Dependency vulnerabilities, this branch | `npm audit` | 0 reported |
-| Secrets and private keys | Keyword search over all commits on all branches | No matches |
+| Secrets and private keys | `gitleaks` 8.30.1 with `--redact` over all commits and the working tree | No leaks found |
 | Injection, XSS, unsafe evaluation | Manual source review | No database, shell, or evaluation use; request input is not reflected |
 | CSRF | Manual source review | Not applicable: no state, sessions, or cookies |
-| Weak hashing | Manual source review | Not applicable: no hashing |
+| Authentication and 2FA | Manual source review | Not implemented: the service has no accounts, sessions, or protected data |
+| Cryptography | Manual source review | Not applicable: the application performs no cryptography and handles no secrets |
+| HTTP edge cases | Raw-socket probes of request targets, conditional headers, and parser errors | Findings CD-09 to CD-11 |
+| Shutdown behavior | Process probes with stalled connections and overlapping signals | Findings CD-12 and CD-13 |
 | Tracked dependencies or build output | `git ls-files` | None |
 
 ## Findings and remediation
@@ -26,9 +29,17 @@
 | CD-06 | Low | No security headers; plain text was served as HTML | Fixed: restrictive headers and `text/plain` |
 | CD-07 | Low | Every path accepted with no explicit method policy or timeouts | Fixed: `405` guard and explicit timeouts |
 | CD-08 | Informational | No CI or dependency verification | Fixed: least-privilege CI pinned to commit SHAs |
+| CD-09 | Low | `GET *` fell through to the framework HTML 404, which echoed the request target | Fixed: generic plain-text 404 |
+| CD-10 | Low | `If-None-Match: *` turned the documented `200` into a `304` | Fixed: conditional handling bypassed |
+| CD-11 | Informational | An `ETag` was generated for time-specific, `no-store` responses | Fixed: disabled |
+| CD-12 | Medium | One idle or partial connection could block graceful shutdown indefinitely | Fixed: 5-second grace period, then remaining connections are closed |
+| CD-13 | Low | `SIGTERM` followed by `SIGINT` closed the server twice and could exit with an unhandled rejection | Fixed: single shared shutdown |
+| CD-14 | Low | `HOST` was documented as validated but was not | Fixed: validated as an IP address or hostname |
+| CD-15 | Low | CI ran Node.js releases older than the latest security releases | Fixed: CI uses 22.23.5 and 24.22.3 |
 
 ## Accepted residual risk
 
 - The service has no authentication, TLS, or rate limiting. It is intended for loopback or use behind a reverse proxy.
 - The response discloses server local time by design.
-- The GitHub Actions workflow has not yet run on GitHub.
+- `engines` still permits Node.js 22.12 or newer, including releases without the latest security fixes. Operators must run a patched release.
+- There is no connection limit, so a client can hold sockets open until the server timeouts apply.

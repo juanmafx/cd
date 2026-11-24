@@ -1,57 +1,76 @@
-Generated: 2026-11-24T01:25:45.864Z
-Node.js: v24.22.0
+Generated: 2026-11-24T02:30:19.289Z
+Node.js: v24.22.3
 Exit code: 0
 
 ▶ HTTP API
-  ✔ returns the timestamp for GET / (23.670318ms)
-  ✔ returns the timestamp for GET /any (3.781466ms)
-  ✔ returns the timestamp for GET /deeply/nested/path (2.277826ms)
-  ✔ returns the timestamp for GET /with?query=1 (2.368037ms)
-  ✔ logs the response time (2.898188ms)
-  ✔ does not reflect the request path (1.754952ms)
-  ✔ answers HEAD without a body (1.688606ms)
-  ✔ rejects POST with 405 (2.005338ms)
-  ✔ rejects PUT with 405 (1.843171ms)
-  ✔ rejects PATCH with 405 (3.306514ms)
-  ✔ rejects DELETE with 405 (1.640452ms)
-  ✔ rejects OPTIONS with 405 (1.455773ms)
-  ✔ sends hardening headers and hides the framework (1.480939ms)
-  ✔ answers malformed percent-encoding with a generic 400 (2.459407ms)
-  ✔ rejects startup when the port is already in use (2.993935ms)
-  ✔ configures request timeouts (0.221239ms)
-✔ HTTP API (74.247998ms)
-✔ serves requests and exits cleanly on SIGTERM (192.85023ms)
-✔ serves requests and exits cleanly on SIGINT (151.155648ms)
-✔ exits non-zero on an invalid PORT (126.317196ms)
-✔ schema defines the optional request event table (3.682887ms)
-✔ schema stores no client identifiers (0.53584ms)
-✔ formats local time as hours:minutes:seconds:milliseconds (4.608509ms)
-✔ keeps the original unpadded field format (0.326527ms)
-✔ handles midnight (0.275352ms)
-✔ delegates when headers were already sent (7.283137ms)
-✔ hides internal error messages and logs only the error name (0.623683ms)
-✔ maps client errors to a generic body (0.362685ms)
-✔ treats non-client status values as server errors (0.278833ms)
-✔ defaults to loopback on port 3000 (4.783489ms)
-✔ treats an empty PORT as unset (0.40325ms)
-✔ reads HOST and PORT from the environment (0.367964ms)
-✔ accepts the port range boundaries (0.303174ms)
-✔ rejects invalid PORT value "65536" (1.029204ms)
-✔ rejects invalid PORT value "-1" (0.279413ms)
-✔ rejects invalid PORT value "80.5" (0.218804ms)
-✔ rejects invalid PORT value "abc" (0.165045ms)
-✔ rejects invalid PORT value "3000abc" (0.246971ms)
-✔ rejects invalid PORT value " 3000" (0.277138ms)
-✔ rejects invalid PORT value "0x50" (3.508903ms)
-✔ rejects invalid PORT value "1e3" (0.203954ms)
-ℹ tests 40
+  ✔ returns the timestamp for GET / (20.136523ms)
+  ✔ returns the timestamp for GET /any (2.713294ms)
+  ✔ returns the timestamp for GET /deeply/nested/path (1.527487ms)
+  ✔ returns the timestamp for GET /with?query=1 (1.442611ms)
+  ✔ logs the response time (2.519085ms)
+  ✔ does not reflect the request path (1.561949ms)
+  ✔ answers HEAD without a body (1.801233ms)
+  ✔ rejects POST with 405 (3.666844ms)
+  ✔ rejects PUT with 405 (1.807706ms)
+  ✔ rejects PATCH with 405 (1.550389ms)
+  ✔ rejects DELETE with 405 (2.900389ms)
+  ✔ rejects OPTIONS with 405 (1.287573ms)
+  ✔ sends hardening headers and hides the framework (1.215591ms)
+  ✔ answers malformed percent-encoding with a generic 400 (1.764044ms)
+  ✔ answers an asterisk-form target with a generic 404 (1.225808ms)
+  ✔ ignores conditional headers on GET (1.258967ms)
+  ✔ ignores conditional headers on HEAD (1.017264ms)
+  ✔ rejects startup when the port is already in use (2.329578ms)
+  ✔ configures request timeouts (0.145435ms)
+✔ HTTP API (67.502929ms)
+✔ serves requests and exits cleanly on SIGTERM (169.832819ms)
+✔ serves requests and exits cleanly on SIGINT (173.676083ms)
+✔ exits cleanly on overlapping signals with a stalled connection (5255.944671ms)
+✔ exits non-zero on an invalid PORT (99.954068ms)
+✔ schema defines the optional request event table (3.218185ms)
+✔ schema stores no client identifiers (0.382117ms)
+✔ shutdown closes a stalled idle connection after the grace period (120.557027ms)
+✔ shutdown closes a stalled partial-header connection after the grace period (105.034093ms)
+✔ formats local time as hours:minutes:seconds:milliseconds (5.814867ms)
+✔ keeps the original unpadded field format (0.244772ms)
+✔ handles midnight (0.211175ms)
+✔ delegates when headers were already sent (5.262896ms)
+✔ hides internal error messages and logs only the error name (0.484704ms)
+✔ maps client errors to a generic body (0.261673ms)
+✔ treats non-client status values as server errors (0.261829ms)
+✔ defaults to loopback on port 3000 (3.584659ms)
+✔ treats an empty PORT as unset (0.541602ms)
+✔ reads HOST and PORT from the environment (0.595678ms)
+✔ accepts the port range boundaries (0.234259ms)
+✔ treats an empty HOST as unset (0.18054ms)
+✔ accepts HOST value "localhost" (6.517957ms)
+✔ accepts HOST value "service.internal" (2.256975ms)
+✔ accepts HOST value "0.0.0.0" (0.145768ms)
+✔ accepts HOST value "192.168.1.10" (0.618912ms)
+✔ accepts HOST value "::" (0.501661ms)
+✔ accepts HOST value "::1" (0.237953ms)
+✔ rejects invalid HOST value "bad host" (0.693088ms)
+✔ rejects invalid HOST value "host/path" (2.35765ms)
+✔ rejects invalid HOST value "-leading.example" (0.144101ms)
+✔ rejects invalid HOST value "a..b" (0.714625ms)
+✔ rejects invalid HOST value "256.1.1.1" (0.118308ms)
+✔ rejects invalid HOST value "xxxxxxxxxxxxxxxxxxxx" (0.139401ms)
+✔ rejects invalid PORT value "65536" (0.17556ms)
+✔ rejects invalid PORT value "-1" (0.099897ms)
+✔ rejects invalid PORT value "80.5" (0.241437ms)
+✔ rejects invalid PORT value "abc" (0.269733ms)
+✔ rejects invalid PORT value "3000abc" (0.103519ms)
+✔ rejects invalid PORT value " 3000" (0.086486ms)
+✔ rejects invalid PORT value "0x50" (0.083716ms)
+✔ rejects invalid PORT value "1e3" (0.082469ms)
+ℹ tests 59
 ℹ suites 1
-ℹ pass 40
+ℹ pass 59
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 684.369036
+ℹ duration_ms 5950.549002
 ℹ start of coverage report
 ℹ -----------------------------------------------------------------------
 ℹ file                   | line % | branch % | funcs % | uncovered lines
@@ -66,12 +85,13 @@ Exit code: 0
 ℹ   middleware           |        |          |         | 
 ℹ    error-handler.js    | 100.00 |   100.00 |  100.00 | 
 ℹ    method-guard.js     | 100.00 |   100.00 |  100.00 | 
+ℹ    not-found.js        | 100.00 |   100.00 |  100.00 | 
 ℹ    security-headers.js | 100.00 |   100.00 |  100.00 | 
 ℹ   routes               |        |          |         | 
 ℹ    timestamp-route.js  | 100.00 |   100.00 |  100.00 | 
 ℹ  main.js               | 100.00 |   100.00 |  100.00 | 
-ℹ  server.js             | 100.00 |    88.89 |  100.00 | 
+ℹ  server.js             | 100.00 |    90.00 |  100.00 | 
 ℹ -----------------------------------------------------------------------
-ℹ all files              | 100.00 |    97.83 |  100.00 | 
+ℹ all files              | 100.00 |    98.18 |  100.00 | 
 ℹ -----------------------------------------------------------------------
 ℹ end of coverage report

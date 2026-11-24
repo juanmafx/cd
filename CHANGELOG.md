@@ -9,7 +9,8 @@ This project follows [Semantic Versioning](https://semver.org/).
 - **Breaking:** requires Node.js 22.12 or newer.
 - **Breaking:** binds to `127.0.0.1` by default instead of all interfaces.
 - **Breaking:** responses use `text/plain` instead of `text/html`.
-- **Breaking:** methods other than `GET` and `HEAD` return `405` instead of `404`.
+- **Breaking:** `POST`, `PUT`, `PATCH`, and `DELETE` return `405` instead of `404`, and `OPTIONS` returns `405` instead of `200`.
+- **Breaking:** responses no longer carry an `ETag`, and conditional requests no longer produce `304`.
 - **Breaking:** the entry point moved from `app.js` to `src/main.js`, and the package is now ESM.
 - The startup log line now includes the host.
 - Upgraded Express from 4.17.1 to 5.3.0.
@@ -18,7 +19,7 @@ This project follows [Semantic Versioning](https://semver.org/).
 ### Added
 
 - `HOST` and `PORT` configuration with validation.
-- Security headers, a generic error handler, server timeouts, and graceful shutdown.
+- Security headers, generic not-found and error handlers, server timeouts, and graceful shutdown bounded to 5 seconds.
 - Automated unit and integration tests with a committed report.
 - GitHub Actions CI with least-privilege permissions and pinned actions.
 - Optional PostgreSQL schema and full project documentation.

@@ -3,6 +3,7 @@ import { createApp } from './app.js';
 const REQUEST_TIMEOUT_MS = 30_000;
 const HEADERS_TIMEOUT_MS = 10_000;
 const KEEP_ALIVE_TIMEOUT_MS = 5_000;
+const SHUTDOWN_GRACE_MS = 5_000;
 
 export const startServer = ({ host, port }, appOptions = {}) =>
   new Promise((resolve, reject) => {
@@ -17,8 +18,12 @@ export const startServer = ({ host, port }, appOptions = {}) =>
     server.keepAliveTimeout = KEEP_ALIVE_TIMEOUT_MS;
   });
 
-export const stopServer = (server) =>
+export const stopServer = (server, { graceMs = SHUTDOWN_GRACE_MS } = {}) =>
   new Promise((resolve, reject) => {
-    server.close((error) => (error ? reject(error) : resolve()));
+    const deadline = setTimeout(() => server.closeAllConnections(), graceMs);
+    server.close((error) => {
+      clearTimeout(deadline);
+      return error ? reject(error) : resolve();
+    });
     server.closeIdleConnections();
   });

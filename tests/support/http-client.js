@@ -1,8 +1,8 @@
 import http from 'node:http';
 
-export const sendRaw = (port, { method = 'GET', path = '/' } = {}) =>
+export const sendRaw = (port, { method = 'GET', path = '/', headers = {} } = {}) =>
   new Promise((resolve, reject) => {
-    const request = http.request({ host: '127.0.0.1', port, method, path }, (response) => {
+    const request = http.request({ host: '127.0.0.1', port, method, path, headers }, (response) => {
       const chunks = [];
       response.on('data', (chunk) => chunks.push(chunk));
       response.on('end', () =>

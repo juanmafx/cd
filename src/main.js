@@ -3,9 +3,13 @@ import { startServer, stopServer } from './server.js';
 
 const server = await startServer(loadConfig());
 
-for (const signal of ['SIGINT', 'SIGTERM']) {
-  process.once(signal, async () => {
-    await stopServer(server);
+let stopping;
+const shutdown = () => {
+  stopping ??= stopServer(server).then(() => {
     process.exitCode = 0;
   });
+};
+
+for (const signal of ['SIGINT', 'SIGTERM']) {
+  process.once(signal, shutdown);
 }

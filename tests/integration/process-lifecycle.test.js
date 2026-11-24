@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
+import { connect } from 'node:net';
+import { setTimeout as delay } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import { sendRaw } from '../support/http-client.js';
@@ -35,6 +37,29 @@ for (const signal of ['SIGTERM', 'SIGINT']) {
     assert.equal(receivedSignal, null);
   });
 }
+
+test('exits cleanly on overlapping signals with a stalled connection', async () => {
+  const child = spawn(process.execPath, [entryPoint], {
+    env: { PATH: process.env.PATH, PORT: '0' },
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
+  const port = await waitForPort(child);
+  const socket = connect(port, '127.0.0.1');
+  socket.on('error', () => {});
+  await once(socket, 'connect');
+  socket.write('GET / HTTP/1.1\r\nHost: localhost\r\nX-Stalled: ');
+  await delay(100);
+  const exited = once(child, 'exit');
+  child.kill('SIGTERM');
+  await delay(100);
+  child.kill('SIGINT');
+  const timer = setTimeout(() => child.kill('SIGKILL'), 15_000);
+  const [code, receivedSignal] = await exited;
+  clearTimeout(timer);
+  socket.destroy();
+  assert.equal(code, 0);
+  assert.equal(receivedSignal, null);
+});
 
 test('exits non-zero on an invalid PORT', async () => {
   const child = spawn(process.execPath, [entryPoint], {

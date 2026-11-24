@@ -14,8 +14,8 @@ Version 2.0.0 modernizes the 2020 service. The response body is unchanged; the r
 
 - Start with `npm start` or `node src/main.js` instead of `node app.js`.
 - To accept remote connections as before, set `HOST=0.0.0.0`, preferably behind a reverse proxy.
-- Clients that relied on `text/html` or on `404` for non-GET methods must be updated.
+- Clients that relied on `text/html`, on `404` for `POST`, `PUT`, `PATCH`, or `DELETE`, on `200` for `OPTIONS`, or on `ETag` revalidation must be updated.
 
 ## Verification
 
-Test results are in `reports/tests/`. The CI workflow has not yet run on GitHub.
+Test results are in `reports/tests/`. CI status for the release commit must be confirmed on GitHub before tagging.

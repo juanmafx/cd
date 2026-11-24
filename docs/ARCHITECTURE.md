@@ -14,6 +14,7 @@ flowchart LR
     Headers --> Guard[method-guard]
     Guard --> Route[timestamp-route]
     Route --> Format[domain/clock-format]
+    Guard --> NotFound[not-found]
     App --> Errors[error-handler]
 ```
 
@@ -22,7 +23,7 @@ flowchart LR
 | Module | Responsibility | Depends on |
 | --- | --- | --- |
 | `src/main.js` | Loads configuration, starts the server, handles `SIGINT` and `SIGTERM` | config, server |
-| `src/server.js` | Owns the listener, timeouts, and graceful close | app |
+| `src/server.js` | Owns the listener, timeouts, and shutdown bounded by a grace period | app |
 | `src/app.js` | Composes the middleware and route; accepts injected clock and loggers | http |
 | `src/config/load-config.js` | Validates `HOST` and `PORT` | nothing |
 | `src/domain/clock-format.js` | Formats a `Date` | nothing |
@@ -31,10 +32,11 @@ flowchart LR
 
 ## Request flow
 
-1. `security-headers` sets headers first, so every response carries them, including errors.
+1. `security-headers` runs first, so every response produced by Express carries the headers, including errors. Requests rejected earlier by the Node.js HTTP parser, such as malformed requests or oversized headers, receive a bare `400` or `431` without them.
 2. `method-guard` rejects anything other than `GET` and `HEAD`.
-3. The wildcard route writes the timestamp and logs the response time.
-4. `error-handler` converts failures into generic plain-text responses.
+3. The wildcard route writes the timestamp and logs the response time. It bypasses conditional-request handling so a `GET` or `HEAD` cannot become a `304`.
+4. `not-found` answers targets the route does not match, such as `GET *`, with a generic body.
+5. `error-handler` converts failures into generic plain-text responses.
 
 ## Design decisions
 

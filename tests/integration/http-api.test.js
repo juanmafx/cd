@@ -82,6 +82,23 @@ describe('HTTP API', () => {
     assert.deepEqual(errorLines, []);
   });
 
+  it('answers an asterisk-form target with a generic 404', async () => {
+    const response = await sendRaw(port, { path: '*' });
+    assert.equal(response.status, 404);
+    assert.equal(response.body, 'Not Found');
+    assert.match(response.headers['content-type'], /^text\/plain/);
+    assert.equal(response.headers['x-content-type-options'], 'nosniff');
+  });
+
+  for (const method of ['GET', 'HEAD']) {
+    it(`ignores conditional headers on ${method}`, async () => {
+      const response = await sendRaw(port, { method, headers: { 'If-None-Match': '*' } });
+      assert.equal(response.status, 200);
+      assert.equal(response.headers.etag, undefined);
+      assert.match(response.headers['content-type'], /^text\/plain/);
+    });
+  }
+
   it('rejects startup when the port is already in use', async () => {
     await assert.rejects(
       startServer({ host: '127.0.0.1', port }, { log: () => {} }),
