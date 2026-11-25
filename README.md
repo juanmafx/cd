@@ -6,7 +6,7 @@ A minimal, hardened Express service that answers any `GET` path with the server 
 
 ## Purpose
 
-`cd` does one thing: it returns a plain-text timestamp from whichever server handled the request. That makes it a small, predictable HTTP target for checking that a host, port, or proxy route reaches a running process.
+`server-time-service` does one thing: it returns a plain-text timestamp from whichever server handled the request. That makes it a small, predictable HTTP target for checking that a host, port, or proxy route reaches a running process.
 
 ## Why this project exists
 
