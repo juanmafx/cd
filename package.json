@@ -25,9 +25,9 @@
   "author": "Juan Manuel Ramallo",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/juanmafx/cd/issues"
+    "url": "https://github.com/juanmafx/server-time-service/issues"
   },
-  "homepage": "https://github.com/juanmafx/cd#readme",
+  "homepage": "https://github.com/juanmafx/server-time-service#readme",
   "dependencies": {
     "express": "5.3.0"
   }

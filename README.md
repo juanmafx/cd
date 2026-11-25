@@ -1,4 +1,4 @@
-# cd
+# server-time-service
 
 A minimal, hardened Express service that answers any `GET` path with the server time at which the request was handled.
 
